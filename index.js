@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
+const path = require("path")
 const cookieParser = require("cookie-parser")
 require("dotenv").config({ path: "./.env" })
 const app = express()
@@ -22,7 +23,8 @@ app.use("/api/public", require("./routes/publicRoute"))
 app.use("/api/order", require("./routes/orderRoute"))
 // 404
 app.use("*", (req, res) => {
-    res.status(404).json({ message: "Resource Not Found" })
+    // res.status(404).json({ message: "Resource Not Found" })
+    res.sendFile(path.join(__dirname,"dist","index.html"))
 })
 // error handler
 app.use((err, req, res, next) => {
